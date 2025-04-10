@@ -36,22 +36,4 @@ instance_profiles = [
         "gpu": True,
         "price_per_hour": 0.615
     },
-
-    # Azure Instances
-    {
-        "provider": "Azure",
-        "name": "B1s",
-        "cpu": 1,
-        "ram_gb": 1,
-        "gpu": False,
-        "price_per_hour": 0.009
-    },
-    {
-        "provider": "Azure",
-        "name": "NC6",
-        "cpu": 6,
-        "ram_gb": 56,
-        "gpu": True,
-        "price_per_hour": 0.90
-    }
 ]
