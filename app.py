@@ -29,6 +29,13 @@ st.write(f"**GPU Required:** {'Yes' if profile['gpu'] else 'No'}")
 st.write(f"**Estimated Duration:** {profile['duration_min']} minutes")
 st.markdown("---")
 
+# Input: how often the workload runs per day
+runs_per_day = st.number_input(
+    "How many times will this workload run per day?",
+    min_value=1, max_value=1000,
+    value=10  # default
+)
+
 st.markdown("### Recommended Cloud Instances")
 
 # Get resource requirements from profile
@@ -44,11 +51,18 @@ if not azure_matches:
     st.info("No matching Azure instances found.")
 else:
     for inst in azure_matches:
+        # Calculate monthly cost
+        duration_hr = profile["duration_min"] / 60
+        cost_per_run = inst["price"] * duration_hr
+        monthly_cost = cost_per_run * runs_per_day * 30 # Assuming 30 days in a month
+
         st.markdown(f"**Azure - {inst['name']}**")
-        st.markdown(f"- vCPUs: {inst['cpu']}")
-        st.markdown(f"- RAM: {inst['ram_gb']} GB")
-        st.markdown(f"- GPU: {'Yes' if inst['gpu'] else 'No'}")
-        st.markdown(f"- Price: ${inst['price']} /hour")
+        st.write(f"- vCPUs: {inst['cpu']}")
+        st.write(f"- RAM: {inst['ram_gb']} GB")
+        st.write(f"- GPU: {'Yes' if inst['gpu'] else 'No'}")
+        st.write(f"- Price: ${inst['price']} /hour")
+        st.write(f"- Estimated Cost/Run: ${cost_per_run:.4f}")
+        st.write(f"- Estimated Monthly Cost: ${monthly_cost:.2f}")
         st.markdown("---")
 
 # Display AWS instance recommendations
@@ -60,9 +74,16 @@ if not aws_matches:
     st.info("No matching AWS instances found.")
 else:
     for inst in aws_matches:
+        # Calculate monthly cost
+        duration_hr = profile["duration_min"] / 60
+        cost_per_run = inst["price_per_hour"] * duration_hr
+        monthly_cost = cost_per_run * runs_per_day * 30 # Assuming 30 days in a month
+
         st.markdown(f"**AWS - {inst['name']}**")
-        st.markdown(f"- vCPUs: {inst['vcpu']}")
-        st.markdown(f"- RAM: {inst['ram_gb']} GB")
-        st.markdown(f"- GPU: {'Yes' if inst['gpu'] else 'No'}")
-        st.markdown(f"- Price: ${inst['price_per_hour']} /hour")
+        st.write(f"- vCPUs: {inst['vcpu']}")
+        st.write(f"- RAM: {inst['ram_gb']} GB")
+        st.write(f"- GPU: {'Yes' if inst['gpu'] else 'No'}")
+        st.write(f"- Price: ${inst['price_per_hour']} /hour")
+        st.write(f"- Estimated Cost/Run: ${cost_per_run:.4f}")
+        st.write(f"- Estimated Monthly Cost: ${monthly_cost:.2f}")
         st.markdown("---")
