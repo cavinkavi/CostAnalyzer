@@ -1,4 +1,5 @@
 import streamlit as st
+from aws.aws_matcher import recommend_aws_instances
 from workload_profiles import workload_profiles
 from azure.azure_matcher import recommend_azure_instances
 
@@ -48,4 +49,20 @@ else:
         st.markdown(f"- RAM: {inst['ram_gb']} GB")
         st.markdown(f"- GPU: {'Yes' if inst['gpu'] else 'No'}")
         st.markdown(f"- Price: ${inst['price']} /hour")
+        st.markdown("---")
+
+# Display AWS instance recommendations
+st.markdown("### AWS")
+st.caption("Showing top 5 AWS matches by price.")
+aws_matches = recommend_aws_instances(profile)
+
+if not aws_matches:
+    st.info("No matching AWS instances found.")
+else:
+    for inst in aws_matches:
+        st.markdown(f"**AWS - {inst['name']}**")
+        st.markdown(f"- vCPUs: {inst['vcpu']}")
+        st.markdown(f"- RAM: {inst['ram_gb']} GB")
+        st.markdown(f"- GPU: {'Yes' if inst['gpu'] else 'No'}")
+        st.markdown(f"- Price: ${inst['price_per_hour']} /hour")
         st.markdown("---")
