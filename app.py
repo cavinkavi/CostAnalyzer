@@ -129,3 +129,12 @@ if profile:
                         st.write(f"- Estimated Cost/Run: ${cost_per_run:.4f}")
                         st.write(f"- Estimated Monthly Cost: ${monthly_cost:.2f}")
                     st.markdown("---")
+
+st.markdown("""
+<hr style="border:1px solid #ccc">
+
+<div style='text-align: center; font-size: 0.9em; color: gray'>
+  © 2025 CostAnalyzer-as-a-Service | Built for NTU Cloud Computing Course<br>
+  View source on <a href='https://github.com/cavinkavi/CostAnalyzer' target='_blank'>GitHub</a>
+</div>
+""", unsafe_allow_html=True)
