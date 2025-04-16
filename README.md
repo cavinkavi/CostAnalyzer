@@ -7,9 +7,11 @@ A simple cloud resource recommendation tool that suggests the most cost-effectiv
 ---
 
 ### Features
-- Choose from predefined workloads or describe your own using AI
-- Auto-generated resource recommendations (CPU, RAM, GPU, duration)
-- Supports Azure and AWS instances
+- 🧠 Describe your workload in natural language (powered by OpenAI)
+- 📦 Choose from predefined workload profiles
+- ⚙️ AI-generated resource estimates (CPU, RAM, GPU, duration)
+- ☁️ Recommends Azure & AWS instances based on price
+- 💸 Includes per-run and monthly cost estimations
 
 ---
 
