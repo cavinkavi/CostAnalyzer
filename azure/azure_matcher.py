@@ -2,10 +2,12 @@ from azure.azure_instance_specs import azure_specs
 from azure.azure_api import fetch_azure_prices
 
 def recommend_azure_instances(workload):
-    azure_prices = fetch_azure_prices(vm_names=list(azure_specs.keys()))
+    vm_names = [spec["name"] for spec in azure_specs]
+    azure_prices = fetch_azure_prices(vm_names=vm_names)
     recommendations = []
 
-    for name, specs in azure_specs.items():
+    for specs in azure_specs:
+        name = specs["name"]
         price_info = azure_prices.get(name)
         if not price_info:
             continue  
@@ -25,4 +27,4 @@ def recommend_azure_instances(workload):
                 "price": price_info["unit_price"]
             })
 
-    return sorted(recommendations, key=lambda x: x["price"])
+    return sorted(recommendations, key=lambda x: x["price"])[:5]  # Return top 5 cheapest instances

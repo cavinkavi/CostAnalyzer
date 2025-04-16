@@ -77,6 +77,7 @@ if profile:
     with st.spinner("🔍 Finding best Azure instances..."):
         # Display Azure instance recommendations
         st.markdown("### 🔷 Azure")
+        st.caption("_Showing top 5 AWS matches by price_")
         azure_matches = recommend_azure_instances(profile)
 
         if not azure_matches:
