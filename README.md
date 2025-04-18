@@ -15,6 +15,23 @@ A simple cloud resource recommendation tool that suggests the most cost-effectiv
 
 ---
 
-### How to Run
+### How to Run Locally
+1. Clone the repo
+```bash
+git clone https://github.com/cavinkavi/CostAnalyzer.git
+cd CostAnalyzer
+```
+2. Install the requirements
+```bash
+pip install -r requirements.txt
+```
+3. Set OpenAI API Key (On macOS/Linux)
+```bash
+export OPENAI_API_KEY=your_key_here
+``` 
+4. Run
+```bash
+streamlit run app.py
+``` 
 
 ---
